@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-searchbar placeholder="Buscar" [(ngModel)]="searchTerm" [formControl]="searchControl" ></ion-searchbar>
+      <ion-buttons end>
+       
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-list *ngIf="toggle" >
+      <ion-list-header>BUSQUEDA</ion-list-header>
+      <ion-item *ngFor="let item of autocompleteItems" (click)="selectItem(item)">
+        <ion-avatar item-start>
+         
+        </ion-avatar>
+        <h2>{{item.category}}</h2>
+        <p>{{item.category}}</p>
+      </ion-item>
+    </ion-list>
+
+
+  </ion-content>
