@@ -8,11 +8,13 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { CartPage } from '../pages/cart/cart';
 import { SearchPage } from '../pages/search/search';
-
+import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserStorageService } from '../services/user-storage.service';
 import { CartService } from '../services/cart.service';
+import { UserService } from '../services/services-rest/user.service';
+import { HttpService } from '../core/http.service';
 import {CartcountComponent} from '../components/cartcount/cartcount';
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
   ],
@@ -43,6 +46,8 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
     SplashScreen,
     UserStorageService,
     CartService,
+    UserService,
+    HttpService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
