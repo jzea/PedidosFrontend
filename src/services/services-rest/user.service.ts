@@ -14,5 +14,8 @@ export class UserService {
   logIn(user: User): Observable<any> {
     return this.httpService.post(UserService.END_POINT + '/login', user);
   }
+  register(user: User): Observable<any> {
+    return this.httpService.post(UserService.END_POINT + '/register', user);
+  }
 
 }

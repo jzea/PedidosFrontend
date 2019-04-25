@@ -8,12 +8,17 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { CartPage } from '../pages/cart/cart';
 import { SearchPage } from '../pages/search/search';
+import { RegisterPage } from '../pages/register/register';
+import {ProductoPage } from '../pages/producto/producto';
 import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserStorageService } from '../services/user-storage.service';
 import { CartService } from '../services/cart.service';
 import { UserService } from '../services/services-rest/user.service';
+import { PedidoService} from '../services/services-rest/pedido.service';
+import{ProductoService } from '../services/services-rest/producto.service';
+import {EmpresaService} from '../services/services-rest/empresa.service';
 import { HttpService } from '../core/http.service';
 import {CartcountComponent} from '../components/cartcount/cartcount';
 @NgModule({
@@ -24,6 +29,8 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
     LoginPage,
     CartPage,
     SearchPage,
+    ProductoPage,
+    RegisterPage,
     CartcountComponent
   ],
   imports: [
@@ -39,7 +46,9 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
     ListPage,
     LoginPage,
     CartPage,
-    SearchPage
+    SearchPage,
+    ProductoPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
@@ -47,6 +56,9 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
     UserStorageService,
     CartService,
     UserService,
+    PedidoService,
+    ProductoService,
+    EmpresaService,
     HttpService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],

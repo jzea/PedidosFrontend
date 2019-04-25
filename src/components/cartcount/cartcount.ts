@@ -16,7 +16,6 @@ export class CartcountComponent {
     )
   }
   openCart() {
-    alert("aaa")
     this.navCtrl.push(CartPage);
   }
 }

@@ -8,7 +8,10 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { CartPage } from '../pages/cart/cart';
 import { SearchPage } from '../pages/search/search';
+import {ProductoPage } from '../pages/producto/producto';
+import { RegisterPage } from '../pages/register/register';
 import { UserStorageService } from '../services/user-storage.service';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -29,7 +32,8 @@ export class MyApp {
       { title: 'login', component: LoginPage },
       { title: 'card', component: CartPage },
       { title: 'search', component: SearchPage },
-      
+      { title: 'register', component: RegisterPage },
+      { title: 'producto', component: ProductoPage },
     ];
 
   }

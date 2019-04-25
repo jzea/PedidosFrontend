@@ -1,7 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import {NavController, NavParams } from 'ionic-angular';
-import { CartService } from '../../services/cart.service';
 import { FormControl } from '@angular/forms';
+import {ProductoService } from '../../services/services-rest/producto.service';
+import { CartService } from '../../services/cart.service';
 import 'rxjs/add/operator/debounceTime';
 @Component({
   selector: 'page-search',
@@ -14,27 +15,44 @@ export class SearchPage implements OnInit{
   searchControl: FormControl;
   toggle: boolean = false;
   temp: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private cartService:CartService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private productoService:ProductoService,private cartService:CartService) {
     this.searchControl = new FormControl();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.autocompleteItems = this.cartService.getProducts();
-      console.log(this.autocompleteItems);
+      if(this.temp){
+        this.autocompleteItems=this.temp;
+        this.findAll();
+      }
       this.filterItems();
     });
   }
   ngOnInit() {
+    this.findAll();
+  }
+  findAll(){
+    this.productoService.findAll().subscribe(
+      (data)=>{
+        if(this.autocompleteItems.length==0){
+          this.autocompleteItems = data['productos'];
+        }
+        this.temp=data['productos'];
+        console.log(this.temp);
+      }
+    );
   }
   filterItems() {
+    console.log("ejecutado filter")
     this.toggle = true;
     if (!this.searchTerm) {
       this.toggle = false;
     }
     this.autocompleteItems = this.autocompleteItems.filter((item) => {
-      return ((item.category).toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
+      return ((item.titulo).toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
     })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
   }
-
+  addToCart(product) {
+    this.cartService.addProduct(product);
+  }
 }

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title text-center>
+      {{nombreEmpresa}}
+    </ion-title>
+    <ion-buttons end>
+      <cartcount></cartcount>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+ <!-- <section padding  margin-bottom>
+    <ion-icon name="person"></ion-icon>
+    <h1 style="font-size:1.4em" no-margin>Welcome, <br>
+      Mr. John Doe</h1>
+  </section>-->
+  <ion-grid>
+      <ion-row wrap>
+          <ion-col width-50 *ngFor="let item of productos">
+            <ion-card >
+                <img src="{{item.foto}}">
+               <ion-card-content>
+                <ion-card-title class="cardbody">{{item.titulo}}</ion-card-title>
+                <p>Precio: {{item.precio}} </p>
+                <button ion-button margin (click)="addToCart(item)" >Agregar</button>
+              </ion-card-content>
+              
+            </ion-card>
+          </ion-col>
+        </ion-row>
+  </ion-grid>
+</ion-content>

@@ -3,21 +3,23 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-searchbar placeholder="Buscar" [(ngModel)]="searchTerm" [formControl]="searchControl" ></ion-searchbar>
+      <ion-searchbar placeholder="Buscar" [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
       <ion-buttons end>
-       
+        <cartcount></cartcount>
       </ion-buttons>
     </ion-navbar>
   </ion-header>
   <ion-content padding>
     <ion-list *ngIf="toggle" >
       <ion-list-header>BUSQUEDA</ion-list-header>
-      <ion-item *ngFor="let item of autocompleteItems" (click)="selectItem(item)">
+      <ion-item *ngFor="let item of autocompleteItems" >
         <ion-avatar item-start>
-         
+          <img src="{{item.foto}}">
         </ion-avatar>
-        <h2>{{item.category}}</h2>
-        <p>{{item.category}}</p>
+        <h2>{{item.titulo}}</h2>
+        <p>{{item.descripcion}}</p>
+        <p>precio s/.{{item.precio}}</p>
+        <button ion-button margin (click)="addToCart(item)" >Agregar</button>
       </ion-item>
     </ion-list>
 
