@@ -17,10 +17,12 @@ import { UserStorageService } from '../services/user-storage.service';
 import { CartService } from '../services/cart.service';
 import { UserService } from '../services/services-rest/user.service';
 import { PedidoService} from '../services/services-rest/pedido.service';
+import { PedidoDetalleService} from '../services/services-rest/pedidoDetalle.service';
 import{ProductoService } from '../services/services-rest/producto.service';
 import {EmpresaService} from '../services/services-rest/empresa.service';
 import { HttpService } from '../core/http.service';
 import {CartcountComponent} from '../components/cartcount/cartcount';
+import { PayPal} from '@ionic-native/paypal';
 @NgModule({
   declarations: [
     MyApp,
@@ -57,9 +59,11 @@ import {CartcountComponent} from '../components/cartcount/cartcount';
     CartService,
     UserService,
     PedidoService,
+    PedidoDetalleService,
     ProductoService,
     EmpresaService,
     HttpService,
+    PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -9,7 +9,7 @@
  
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of selectedItems" lines="inset">
+    <ion-item *ngFor="let item of productos" lines="inset">
       <ion-label>{{ item.count }}x {{ item.titulo }} - {{ item.precio | currency:'USD':'symbol' }}</ion-label>
       <ion-label slot="end" text-right>{{ (item.precio * item.count) | currency:'USD':'symbol' }}</ion-label>
     </ion-item>
