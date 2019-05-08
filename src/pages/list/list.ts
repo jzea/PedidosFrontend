@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, ModalController, ViewController  } from 'ionic-angular';
+import {EntregaPedidoService} from '../../services/services-rest/entregaPedido.service';
+import {EntregaPedido} from '../../models/entregaPedido.model';
+import {ToastService} from '../../services/toast.service';
+import {SearchPage} from '../search/search';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -9,8 +12,15 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pedidos:EntregaPedido[];
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams,public entregaPedidoService:EntregaPedidoService, public toastService:ToastService) {
+    this.entregaPedidoService.findByCodUsuario(5).subscribe(
+      (data)=>{
+        this.pedidos=data['entregaPedido'];
+        console.log(this.pedidos);
+      }
+    )
+    
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -27,11 +37,17 @@ export class ListPage {
       });
     }
   }
-
+  presentContactModal() {
+    let contactModal = this.modalCtrl.create(SearchPage);
+    contactModal.present();
+  }
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(ListPage, {
       item: item
     });
+  }
+  entregarPedido(){
+    this.toastService.presentToast("Pedido entregado correctamente");
   }
 }

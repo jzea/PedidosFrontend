@@ -1,11 +1,11 @@
 
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <button ion-button menuToggle start>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Inicio
+    <ion-title text-center>
+    Pedidos
     </ion-title>
     <ion-buttons end>
       <cartcount></cartcount>
@@ -35,7 +35,7 @@
               </ion-card-title>
               <ion-card-content>
                  
-                <img src="http://zcode10.com/image.jpg">
+                <img src="{{product.imagen}}">
                 <!--<ion-button color="primary" expand="full" (click)="addToCart(product)"></ion-button>-->
                 <button ion-button (click)="verProductos(product)" >ver</button>
                  

@@ -3,21 +3,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Pedidos pendientes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
+  <ion-list >
+    <ion-list-header>Entregas Pendientes</ion-list-header>
+    <ion-item *ngFor="let item of pedidos" >
+        <ion-icon name="appstore" item-start></ion-icon>
+      <h2>Pedido #{{item.codentregapedido}}</h2>
+      <p>Cliente: {{item.codusuario.usuario}}</p>
+      <p *ngIf="!item.codusuario.latitud">{{item.codusuario.direccion}}</p>
+      <p>{{item.codpedido.fecha.date}}</p>
+      <p >{{item.codpedido.latitud}}--{{item.codpedido.longitud}}</p>
+      <button slot="end"  ion-button outline item-end margin (click)="entregarPedido(item)" >Entregar</button>
+      <button slot="end"  ion-button outline item-end margin (click)="presentContactModal()" >Entregar2</button>
+    </ion-item>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
 </ion-content>

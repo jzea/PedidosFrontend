@@ -9,6 +9,8 @@ import { PedidoDetalle} from '../../models/pedidoDetalle.model';
 import {UserStorageService} from '../../services/user-storage.service';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
 import { ToastController } from 'ionic-angular';
+import {ToastService} from '../../services/toast.service';
+import {MapPage} from '../map/map';
 @IonicPage()
 @Component({
   selector: 'page-cart',
@@ -18,14 +20,19 @@ export class CartPage  implements OnInit {
   productos= [];
   total = 0;
   codUser="";
-  constructor(private toastCtrl:ToastController,private payPal: PayPal,public navCtrl: NavController, public navParams: NavParams, private cartService:CartService, private pedidoService:PedidoService,private userStorageService:UserStorageService,private pedidoDetalleService:PedidoDetalleService) {
+  latLng;
+  constructor(private toastService:ToastService,private payPal: PayPal,public navCtrl: NavController, public navParams: NavParams, private cartService:CartService, private pedidoService:PedidoService,private userStorageService:UserStorageService,private pedidoDetalleService:PedidoDetalleService) {
     this.userStorageService.getIdUser().then(
       (codUser)=>{
         this.codUser=codUser;
         console.log(codUser)
       }
-    )
-
+    );
+    this.userStorageService.getLatLng().subscribe(
+      (data)=>{
+        this.latLng=data;
+      }
+    )  
   }
 
   ionViewDidLoad() {
@@ -51,7 +58,13 @@ export class CartPage  implements OnInit {
   }
   saveOrder(){
     console.log('usuario '+ this.codUser);
-  const pedido:Pedido ={codusuario:this.codUser,fecha:'2019/04/25',latitud:'11',longitud:'12'};
+    let latitud="";
+    let longitud="";
+    if(this.latLng){
+       latitud=this.latLng.lat;
+       longitud=this.latLng.lng;
+    }
+  const pedido:Pedido ={codusuario:this.codUser,fecha:'2019/04/25',latitud,longitud};
   this.pedidoService.create(pedido).subscribe(
     (data)=>{
       console.log(data);
@@ -80,21 +93,18 @@ export class CartPage  implements OnInit {
       merchantUserAgreementURL: ''
     })).then(() => {
     
-      let payment = new PayPalPayment(this.total+'.00', 'USD', 'Pago por la orden', 'sale');
+      let payment = new PayPalPayment(this.total+'.00', 'USD', 'Pago por el pedido', 'sale');
       this.payPal.renderSinglePaymentUI(payment).then((response) => {
-        this.presentToast("pago realizado correctamente");
+        this.toastService.presentToast("Pago realizado correctamente");
         this.saveOrder();
       }, () => {
-        console.log('erro ao renderizar o pagamento do paypal');
+        this.toastService.presentToast("Error al hacer el pago de paypal");
       })
     })
   })
   }
-  presentToast(message: string) {
-    let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-    });
-    toast.present();
-}
+  addDireccion(){
+    this.navCtrl.push(MapPage);
+  }
+
 }

@@ -1,0 +1,17 @@
+
+<ion-header>
+    <ion-navbar color="dark">
+      <ion-title text-center>
+        Buscar dirección
+      </ion-title>
+      <ion-buttons end>
+        
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding>
+    <ion-input type="text" placeholder="dirección" name="direccion" [(ngModel)]="direccion" required></ion-input>
+    <button ion-button  color="primary" (click)="geocoder()">buscar</button>
+    <button ion-button  color="primary" (click)="back()">Agregar dirección</button>
+    <div id="map_canvas"></div>
+</ion-content>

@@ -51,7 +51,7 @@ export class CartService {
             temp=empresas[i].categoria.nombrecat;
             const category=empresas[i].categoria.nombrecat;
             empresas[i].categoria=null;
-            const empresa:CategoriaEmpresa ={category,empresas:[empresas[i]]}
+            const empresa:CategoriaEmpresa ={category,empresas:[empresas[i]],expanded:true}
             this.empresaAll.push(empresa);
             console.log(this.empresaAll)
           }else{

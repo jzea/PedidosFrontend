@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title text-center>Detalle del pedido</ion-title>
   </ion-navbar>
 </ion-header>
  
@@ -16,6 +16,10 @@
     <ion-item>
       Total: <span slot="end">{{ total | currency:'USD':'symbol' }}</span>
     </ion-item>
+    <ion-item *ngIf="latLng">
+      Nueva dirección: <span slot="end" >{{ latLng.direccion}}</span>
+    </ion-item>
   </ion-list>
   <button ion-button  color="primary" (click)="pedir()">Pedir</button>
+  <button ion-button  color="primary" (click)="addDireccion()">Modificar dirección</button>
 </ion-content>

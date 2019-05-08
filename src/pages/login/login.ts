@@ -23,6 +23,7 @@ export class LoginPage {
       (data)=>{
         console.log(data);
         this.userStorageService.setIdUser(data['users'].codusuario);
+        this.userStorageService.setRol(data['users'].rol)
         this.navCtrl.setRoot(HomePage);
       },
       (error)=> {
